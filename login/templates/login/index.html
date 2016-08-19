@@ -1,0 +1,42 @@
+
+<div style='float: right;'><a href="/home">login</a></div><br/>
+<div style='float: right;'><a href="/register">new registration</a></div>
+
+{% block content %}
+    <br/>
+    <div style='float: right;'><a href="/logout/">Logout</a></div>
+    <p>Welcome {{ user.username }} !!!</p>
+{% endblock %}
+
+
+<form action="{% url 'add_question' %}" method="post">
+
+            {% csrf_token %}
+            <label>question</label><br/>
+            <textarea name="question" rows="8" cols="60" ></textarea><br/>
+            <input type="submit" value="submit" name="submit" /><br/>
+            <hr />
+
+
+    <ul>
+    {% for question in latest_question_list %}
+       <li><a href={% url 'detail'  question_id=question.id %}>{{ question.question }}</a></li>
+        <!--in question.question first is class name and second is its attribute name-->
+    {% endfor %}
+    </ul>
+</form>
+
+
+<form  action="{% url 'search' %}" accept-charset="ISO-8859-1" method="POST"> {% csrf_token %}
+    <search><input type="text" name="search" id="id_search"><input type="submit" value="Search"></search>
+
+     <ul>
+    {% for questio in object_list %}
+         <h3>{{ questio }}</h3>
+
+
+        <!--in question.question first is class name and second is its attribute name-->
+     {% endfor %}
+    </ul>
+</form>
+

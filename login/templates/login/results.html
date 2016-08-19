@@ -1,0 +1,20 @@
+<!--{% for question in latest_question_list %}-->
+       <!--<li><a {{ question.question }}</a></li>-->
+        <!--&lt;!&ndash;in question.question first is class name and second is its attribute name&ndash;&gt;-->
+
+
+<!--{% endfor %}-->
+<h1>{{ question.question }}</h1>
+
+
+<ul>
+{% for choice in question.answer_set.all %}
+    <li>{{ choice.answer_text }} -- {{ choice.upvotes }} upvote{{ choice.upvotes|pluralize }}
+        {{ choice.downvotes }} downvote{{ choice.downvotes|pluralize }}
+    </li>
+
+{% endfor %}
+</ul>
+
+<a href="{% url 'detail' question.id %}">Vote again?</a><br>
+<a href="{% url 'index' %}">home page</a>

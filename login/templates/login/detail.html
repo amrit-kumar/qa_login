@@ -1,0 +1,26 @@
+<!--{% load staticfiles %}-->
+<!--<link rel="stylesheet" type="text/css" href="{% static 'login/resultstyle.css' %}" />-->
+
+<h1>{{ question.question }}</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+
+    <!--{% csrf_token %}-->
+    <!--{% for answer in question.answer_set.all %}-->
+        <!--<input type="radio" name="answer" id="answer{{ forloop.counter }}" value="{{ answer.id }}" />-->
+        <!--<label for="answer{{ forloop.counter }}">{{ answer.answer_text }}</label><br />-->
+    <!--{% endfor %}-->
+    <!--<input type="submit" value="upvote" />-->
+    <!--</form>-->
+  <form action="{% url 'vote' question.id %}" method="post">
+    {% csrf_token %}
+    {% for answer in question.answer_set.all %}
+        <input type="radio" name="answer" id="answer{{ forloop.counter }}" value="{{ answer.id }}" />
+        <label for="answer{{ forloop.counter }}">{{ answer.answer_text }}</label><br />
+    {% endfor %}
+        <td><input type="submit" value="upvote" name="_upvote"></td>
+        <td><input type="submit" value="downvote" name="_downvote"></td>
+    </form>
+
+
